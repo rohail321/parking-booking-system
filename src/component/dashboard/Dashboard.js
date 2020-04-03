@@ -1,39 +1,88 @@
-import React from 'react'
-import {NavLink} from 'react-router-dom'
+import React,{useEffect,useState} from 'react'
+import Navbar from '../navigation/Navbar'
+import bg from '../../asset/1.png'
+import Footer from '../layout/Footer'
+import Booking from '../form/Booking'
+import FeedbackTable from '../table/Admin/FeedbackTable'
+import BookingTable from '../table/Admin/BookingTable'
+import BookingTables from '../table/user/BookingTable'
 import firebase from '../../firebase'
 
 function Dashboard() {
+
+  const[user,setUser]=useState('')
+
+  useEffect(()=>{
+    currentUser().then((data)=>{
+      checkUser(data)
+
+    })
+  },[])
+
+
+  const checkUser=(data)=>{
+    const db=firebase.firestore()
+    const getDoc= db.collection('user')
+    getDoc.where('id', '==', data).get()
+    .then(res=>{
+        res.forEach((result)=>{
+           setUser(result.data().user)
+
+
+
+        })
+    })
+}
+
+
+  
+  const currentUser=()=>{
+    return new Promise((res,rej)=>{
+      firebase.auth().onAuthStateChanged((user)=>{
+          if(user){
+              res(user.uid)
+          }
+          else{
+              rej('False')
+          }
+      })
+  })
+  }
+  let panel
+  if(user==='admin')
+  {
+    panel=(<div><section>
+      <FeedbackTable/>
+    </section>
+    <section>
+      <BookingTable />
+    </section></div>)
+  }
+  else if(user==='customer'){
+    panel=(<div><section>
+      <BookingTables/>
+    </section></div>)
+  }
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <NavLink className="navbar-brand" to='/dashboard'>  
-</NavLink>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  <div className="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul className="navbar-nav ml-auto">
-      <li className="nav-item active">
-        <NavLink className="nav-link" to='/dashboard'>Home <span className="sr-only">(current)</span></NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink className="nav-link" to='/dashboard/vacancy'>Vacancy</NavLink>
-      </li>
-     
-      
-     
-      
-    
-      <li className="nav-item dropdown">
-        <NavLink className="nav-link dropdown-toggle" to='' id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Welcome 
-        </NavLink>
-        <div className="dropdown-menu"  style={{backgroundColor:'white'}}aria-labelledby="navbarDropdownMenuLink">
-          <NavLink className="dropdown-item" to='' style={{color:'black',backgroundColor:'white'}} onClick={()=>(firebase.auth().signOut())}>signOut</NavLink>
-        </div>
-      </li>
-    </ul>
-  </div>
-</nav>
+        <div style={{backgroundImage:`URL(${bg})`,height: "557px",
+        backgroundSize: "",
+        backgroundRepeat: "no-repeat",
+        backgroundColor:'lightgrey'
+        }}>
+
+          <Navbar/>
+
+          <h1 style={{color:'white',marginTop:'100px'}}>Book Your Parking Space!</h1>
+          <section>
+            <Booking/>
+            
+          </section>
+          {panel}
+          
+
+          <Footer/>
+          
+        </div >
     )
 }
 

@@ -1,5 +1,5 @@
 const initialState={
-    isAuth:false,
+    isAuth:true,
     email:'',
     id:'',
     
@@ -9,7 +9,7 @@ function LoginReducer(state=initialState,action) {
     switch (action.type) {
         case 'Login':
             return{...state,
-            isAuth:true,
+            isAuth:action.isAuth,
             email:action.email,
             id:action.id
         }
