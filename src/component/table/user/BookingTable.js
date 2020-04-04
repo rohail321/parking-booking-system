@@ -39,15 +39,41 @@ const BookingTable = () => {
       }
 
       const changeHandler=(e,indexId,id)=>{
-          const deleteUser=booking.filter((user)=>(id!==user.id))
-          setBooking([...deleteUser])
-          const db=firebase.firestore()
-          let userdb= db.collection("booking").where('id', '==', id)
-          userdb.get().then((res)=>{
-              res.forEach((doc)=>{
-                  doc.ref.delete()
-              })
+          let user =[...booking]
+          let data=[]
+          user.splice(indexId,1)
+          setBooking(user)
+
+          let promise =new Promise((res,rej)=>{
+            const db=firebase.firestore()
+            let userdb= db.collection("booking").get()
+            if(userdb){
+                res(userdb)
+            }
+            else{
+                rej('false')
+            }
+
           })
+          
+          promise.then((res)=>{
+            res.forEach((doc)=>{
+                  
+                         data.push({id:doc.id,
+                            data:doc.data()})
+                      })
+                      data.filter((res,index)=>(index===indexId))
+                      .forEach((res)=>{
+                        const db=firebase.firestore()
+                        db.collection('booking').doc(res.id).delete()
+                        
+                      })
+                      
+          })
+          
+          
+       
+       
         
           
       }

@@ -31,6 +31,7 @@ const BookingForm = ({enterName,setName,enterContact,setContact,enterArea,setAre
 
           <label htmlFor="country">Area</label>
           <select id="country" name="country" value={enterArea} onChange={e=>setArea(e.target.value)} >
+          <option value="">select</option>
             <option value="gulshan">Gulshan</option>
             <option value="drigh">Drigh</option>
             <option value="pechs">Pechs</option>

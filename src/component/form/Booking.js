@@ -55,6 +55,7 @@ const clickHandler=(e)=>{
             db.collection('booking').add({id:data,name:enterName,contact:enterContact,area:enterArea,
               date:enterDate,time:enterTime,duration:enterDuration,slot:slotId})
             .then((res)=>{
+              
                
                if(res.slot===slotId)alert('already booked')
                alert('Parking Space Book')
