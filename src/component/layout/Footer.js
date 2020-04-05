@@ -5,7 +5,7 @@ import Feedback from '../form/Feedback'
 const Footer = () => {
     
     return (
-            <footer className="site-footer" style={{marginTop:'400px'}} >
+            <footer className="site-footer"  >
       <div className="container">
         <div className="row">
           

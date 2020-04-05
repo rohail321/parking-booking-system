@@ -3,9 +3,6 @@ import Navbar from '../navigation/Navbar'
 import bg from '../../asset/1.png'
 import Footer from '../layout/Footer'
 import Booking from '../form/Booking'
-import FeedbackTable from '../table/Admin/FeedbackTable'
-import BookingTable from '../table/Admin/BookingTable'
-import BookingTables from '../table/user/BookingTable'
 import firebase from '../../firebase'
 
 function Dashboard() {
@@ -48,21 +45,8 @@ function Dashboard() {
       })
   })
   }
-  let panel
-  if(user==='admin')
-  {
-    panel=(<div><section>
-      <FeedbackTable/>
-    </section>
-    <section>
-      <BookingTable />
-    </section></div>)
-  }
-  else if(user==='customer'){
-    panel=(<div><section>
-      <BookingTables/>
-    </section></div>)
-  }
+ 
+  
     return (
         <div style={{backgroundImage:`URL(${bg})`,height: "557px",
         backgroundSize: "",
@@ -77,7 +61,7 @@ function Dashboard() {
             <Booking/>
             
           </section>
-          {panel}
+         
           
 
           <Footer/>
