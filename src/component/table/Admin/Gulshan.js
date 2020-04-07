@@ -1,14 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import firebase from '../../../firebase'
-const FeedbackTable = () => {
-    const [feedback, setFeedback] = useState([])
+
+const Gulshan = () => {
+
+    const [booking, setBooking] = useState([])
     useEffect(() => {
         let array=[]
        getBooking().then((res)=>{
            res.docs.forEach((dt)=>{
             array.push(dt.data())
                console.log(dt.data())
-               setFeedback(feedback=>[...feedback,dt.data()])
+               setBooking(booking=>[...booking,dt.data()])
                console.log(array)
            })
        })
@@ -18,7 +20,7 @@ const FeedbackTable = () => {
     const getBooking=async ()=>{
         // let array=[]
         return new Promise((res,rej)=>{
-            const db=firebase.firestore().collection('feedback').get()
+            const db=firebase.firestore().collection('gulshanbooking').get()
             
         // db.docs.forEach((doc)=>{
         //     array.push(doc.data())
@@ -36,14 +38,14 @@ const FeedbackTable = () => {
         
     }
     const changeHandler=(e,indexId,id)=>{
-        let user =[...feedback]
+        let user =[...booking]
         let data=[]
         user.splice(indexId,1)
-        setFeedback(user)
+        setBooking(user)
 
         let promise =new Promise((res,rej)=>{
           const db=firebase.firestore()
-          let userdb= db.collection("feedback").get()
+          let userdb= db.collection("gulshanbooking").get()
           if(userdb){
               res(userdb)
           }
@@ -62,23 +64,27 @@ const FeedbackTable = () => {
                     data.filter((res,index)=>(index===indexId))
                     .forEach((res)=>{
                       const db=firebase.firestore()
-                      db.collection('feedback').doc(res.id).delete()
+                      db.collection('gulshanbooking').doc(res.id).delete()
                       
                     })
                     
         })
   
     }
+   
     let table
-    
-    if(feedback)
+    if(booking)
     {
-        table=feedback.map((data,index)=>
-           (  <tr key={index}>
+        
+        table=booking.map((data,index)=>
+            (<tr key={index}>
                 <td>{data.name}</td>
                 <td>{data.contact}</td>
-                <td>{data.email}</td>
-                <td>{data.feedback}</td>
+                <td>{data.slot}</td>
+                <td>{data.date}</td>
+                <td>{data.from}</td>
+                <td>{data.to}</td>
+                <td>{data.area}</td>
                 <td><button type="button" class="" onClick={(e)=>changeHandler(e,index,data.id)}><i class="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
 </button></td>
                 
@@ -93,31 +99,37 @@ const FeedbackTable = () => {
             <td>No Data</td>
             <td>No Data</td>
             <td>No Data</td>
+            <td>No Data</td>
+            <td>No Data</td>
+            <td>No Data</td>
             
             </tr>
-       )
+       
+   )
     }
     return (
-        <React.Fragment>
-           <div className="table-responsive">
-            <table className="table table-bordered">
-            <thead>
-                <tr>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>Email</th>
-                <th>Feedback</th>
-                
-                
-                </tr>
-            </thead>
-            <tbody>
-              {table}
-            </tbody>
-            </table>
-        </div>
-        </React.Fragment>
+        <div className="table-responsive">
+        <table className="table table-bordered">
+        <thead>
+            <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Slot</th>
+            <th>Date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Area</th>
+
+            
+            
+            </tr>
+        </thead>
+        <tbody>
+            {table}
+        </tbody>
+        </table>
+    </div>
     )
 }
 
-export default FeedbackTable
+export default Gulshan

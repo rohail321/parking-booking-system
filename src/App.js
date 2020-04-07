@@ -11,12 +11,15 @@ import ForgotPassword from './component/form/ForgotPassword'
 import Booking from './component/table/user/Booking'
 import BookingAdmin from './component/table/Admin/BookingAdmin'
 import Feedback from './component/table/Admin/Feedback'
+import firebase from './firebase'
 
 
 
 function App() {
   const data=useSelector(state=>state)
-  console.log(data.LoginReducer.isAuth)
+
+ 
+
   return (
     <Router>
     

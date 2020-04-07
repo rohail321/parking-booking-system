@@ -2,10 +2,9 @@ import React,{useEffect,useState} from 'react'
 import './Parking.css'
 import firebase from 'firebase'
 
-const ParkingForm = ({ name,contact,area,date,from,to}) => {
+const Drigh = ({ name,contact,area,date,from,to}) => {
   const [enterUser,setUser]=useState([])
   const[enterSlot,setSlot]=useState()
-
 
   const click=(e)=>{
     let slt=[]
@@ -23,8 +22,7 @@ const ParkingForm = ({ name,contact,area,date,from,to}) => {
         currentUser().then((data)=>{
           const db=firebase.firestore()
           
-            db.collection('booking').add({id:data,name,contact,area,
-              date,from,to,slot:e.target.id})
+            db.collection('drighbooking').add({id:data,name,contact,area,date,from,to,slot:slotId})
             .then((res)=>{
               
                if(res.slot===slotId)alert('already booked')
@@ -58,7 +56,7 @@ const ParkingForm = ({ name,contact,area,date,from,to}) => {
   
   const getData= async ()=>{
     
-      const snapshot = await firebase.firestore().collection('booking').get()
+      const snapshot = await firebase.firestore().collection('drighbooking').get()
       return (snapshot.docs)
    
    
@@ -180,4 +178,4 @@ let usr
     )
 }
 
-export default ParkingForm
+export default Drigh

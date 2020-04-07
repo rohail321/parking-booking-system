@@ -37,6 +37,40 @@ const BookingTable = () => {
         
         
     }
+    const changeHandler=(e,indexId,id)=>{
+        let user =[...booking]
+        let data=[]
+        user.splice(indexId,1)
+        setBooking(user)
+
+        let promise =new Promise((res,rej)=>{
+          const db=firebase.firestore()
+          let userdb= db.collection("booking").get()
+          if(userdb){
+              res(userdb)
+          }
+          else{
+              rej('false')
+          }
+
+        })
+        
+        promise.then((res)=>{
+          res.forEach((doc)=>{
+                
+                       data.push({id:doc.id,
+                          data:doc.data()})
+                    })
+                    data.filter((res,index)=>(index===indexId))
+                    .forEach((res)=>{
+                      const db=firebase.firestore()
+                      db.collection('booking').doc(res.id).delete()
+                      
+                    })
+                    
+        })
+  
+    }
    
     let table
     if(booking)
@@ -48,9 +82,11 @@ const BookingTable = () => {
                 <td>{data.contact}</td>
                 <td>{data.slot}</td>
                 <td>{data.date}</td>
-                <td>{data.duration}</td>
-                <td>{data.time}</td>
+                <td>{data.from}</td>
+                <td>{data.to}</td>
                 <td>{data.area}</td>
+                <td><button type="button" class="" onClick={(e)=>changeHandler(e,index,data.id)}><i class="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
+</button></td>
                 
                 </tr>)
         )
@@ -72,6 +108,7 @@ const BookingTable = () => {
    )
     }
     return (
+        <div><h1>Pechs</h1>
         <div className="table-responsive">
         <table className="table table-bordered">
         <thead>
@@ -80,8 +117,8 @@ const BookingTable = () => {
             <th>Contact</th>
             <th>Slot</th>
             <th>Date</th>
-            <th>Duration</th>
-            <th>Time</th>
+            <th>From</th>
+            <th>To</th>
             <th>Area</th>
 
             
@@ -92,7 +129,8 @@ const BookingTable = () => {
             {table}
         </tbody>
         </table>
-    </div>
+    </div></div>
+        
     )
 }
 

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import firebase from '../../../firebase'
 
-const BookingTable = () => {
+const Drigh = () => {
     const [id,setId] =useState('')
     const [booking,setBooking] =useState([])
 
@@ -18,7 +18,7 @@ const BookingTable = () => {
     const checkBooking=async (userId)=>{
         const db=await firebase.firestore()
         
-            const getDoc=await db.collection('booking')
+            const getDoc=await db.collection('drighbooking')
         const doc=await getDoc.where('id', '==', userId).get()
         doc.forEach((res)=>{
             setBooking(booking=>[...booking,res.data()])
@@ -46,7 +46,7 @@ const BookingTable = () => {
 
           let promise =new Promise((res,rej)=>{
             const db=firebase.firestore()
-            let userdb= db.collection("booking").get()
+            let userdb= db.collection("drighbooking").get()
             if(userdb){
                 res(userdb)
             }
@@ -65,7 +65,7 @@ const BookingTable = () => {
                       data.filter((res,index)=>(index===indexId))
                       .forEach((res)=>{
                         const db=firebase.firestore()
-                        db.collection('booking').doc(res.id).delete()
+                        db.collection('drighbooking').doc(res.id).delete()
                         
                       })
                       
@@ -113,7 +113,7 @@ const BookingTable = () => {
     }
     return (
         <div>
-          <h1>Pechs</h1>
+            <h1>Drigh</h1>
              <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
@@ -140,4 +140,4 @@ const BookingTable = () => {
                 )
 }
 
-export default BookingTable
+export default Drigh

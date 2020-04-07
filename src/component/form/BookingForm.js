@@ -20,13 +20,13 @@ const BookingForm = ({enterName,setName,enterContact,setContact,enterArea,setAre
           <input type="text" id="lname" name="contact" value={enterContact} onChange={e=>setContact(e.target.value)} placeholder="Your Contact.." required/>
           
           <label htmlFor="lname">Date</label>
-          <input type="text" id="lname" name="date" value={enterDate} onChange={e=>setDate(e.target.value)} placeholder="Enter Date" required/>
+          <input type="date" id="lname" name="date" value={enterDate} onChange={e=>setDate(e.target.value)} placeholder="Enter Date" required/>
           
-          <label htmlFor="lname">Time</label>
-          <input type="text" id="lname" name="time" value={enterTime} onChange={e=>setTime(e.target.value)} placeholder="Enter time ex:6:00pm" required/>
+          <label htmlFor="lname">From</label>
+          <input type="time" id="lname" name="time" value={enterTime} onChange={e=>setTime(e.target.value)} placeholder="Enter time ex:6:00pm" required/>
           
-          <label htmlFor="lname">Duration</label>
-          <input type="text" id="lname" name="duration" value={enterDuration} onChange={e=>setDuration(e.target.value)} placeholder="For How Long" required/>
+          <label htmlFor="lname">To</label>
+          <input type="time" id="lname" name="duration" value={enterDuration} onChange={e=>setDuration(e.target.value)} placeholder="For How Long" required/>
 
 
           <label htmlFor="country">Area</label>

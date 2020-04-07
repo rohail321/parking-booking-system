@@ -13,7 +13,10 @@ const Feedback = () => {
     currentUser().then((data)=>{
       const db=firebase.firestore()
       db.collection('feedback').add({id:data,name:enterName,email:enterEmail,contact:enterContact,feedback:enterFeedback})
-    .catch(err=>{
+      .then(()=>{
+        alert('feedback send')
+      })
+      .catch(err=>{
         alert(err)
     })
 		})
