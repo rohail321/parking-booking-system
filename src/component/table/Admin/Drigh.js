@@ -9,29 +9,21 @@ const Drigh = () => {
        getBooking().then((res)=>{
            res.docs.forEach((dt)=>{
             array.push(dt.data())
-               console.log(dt.data())
                setBooking(booking=>[...booking,dt.data()])
-               console.log(array)
            })
        })
      
         
     },[])
     const getBooking=async ()=>{
-        // let array=[]
         return new Promise((res,rej)=>{
             const db=firebase.firestore().collection('drighbooking').get()
-            
-        // db.docs.forEach((doc)=>{
-        //     array.push(doc.data())
-        //     setBooking(array)
-        //     console.log(booking)
-        // })
+    
         if(db){
             res(db)
         }
         else{
-            rej('fasle')
+            rej('false')
         }
         })
         
@@ -85,7 +77,7 @@ const Drigh = () => {
                 <td>{data.from}</td>
                 <td>{data.to}</td>
                 <td>{data.area}</td>
-                <td><button type="button" class="" onClick={(e)=>changeHandler(e,index,data.id)}><i class="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
+                <td><button type="button" onClick={(e)=>changeHandler(e,index,data.id)}><i className="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
 </button></td>
                 
                 </tr>)

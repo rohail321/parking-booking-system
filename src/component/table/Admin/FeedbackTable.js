@@ -79,7 +79,7 @@ const FeedbackTable = () => {
                 <td>{data.contact}</td>
                 <td>{data.email}</td>
                 <td>{data.feedback}</td>
-                <td><button type="button" class="" onClick={(e)=>changeHandler(e,index,data.id)}><i class="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
+                <td><button type="button"  onClick={(e)=>changeHandler(e,index,data.id)}><i className="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
 </button></td>
                 
                 </tr>)

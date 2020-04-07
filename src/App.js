@@ -6,12 +6,11 @@ import Dashboard from './component/dashboard/Dashboard'
 import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
 import Verify from './Verify'
 import PrivateRoute from './PrivateRoute'
-import{useDispatch,useSelector} from 'react-redux'
+import{useSelector} from 'react-redux'
 import ForgotPassword from './component/form/ForgotPassword'
 import Booking from './component/table/user/Booking'
 import BookingAdmin from './component/table/Admin/BookingAdmin'
 import Feedback from './component/table/Admin/Feedback'
-import firebase from './firebase'
 
 
 

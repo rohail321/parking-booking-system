@@ -7,9 +7,7 @@ const Drigh = () => {
 
     useEffect(()=>{
         currentUser().then((data)=>{
-            console.log(data)
             setId(data)
-            console.log(id)
             checkBooking(data)
         })
 
@@ -89,7 +87,7 @@ const Drigh = () => {
                 <td>{data.from}</td>
                 <td>{data.to}</td>
                 <td>{data.area}</td>
-                <td><button type="button" class="" onClick={(e)=>changeHandler(e,index,data.id)}><i class="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
+                <td><button type="button" onClick={(e)=>changeHandler(e,index,data.id)}><i className="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
 </button></td>
           
           </tr>
@@ -114,8 +112,8 @@ const Drigh = () => {
     return (
         <div>
             <h1>Drigh</h1>
-             <div class="table-responsive">
-    <table class="table table-bordered">
+             <div className="table-responsive">
+    <table className="table table-bordered">
       <thead>
         <tr>
         <th>Name</th>

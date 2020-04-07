@@ -9,9 +9,7 @@ const Gulshan = () => {
        getBooking().then((res)=>{
            res.docs.forEach((dt)=>{
             array.push(dt.data())
-               console.log(dt.data())
                setBooking(booking=>[...booking,dt.data()])
-               console.log(array)
            })
        })
      
@@ -85,7 +83,7 @@ const Gulshan = () => {
                 <td>{data.from}</td>
                 <td>{data.to}</td>
                 <td>{data.area}</td>
-                <td><button type="button" class="" onClick={(e)=>changeHandler(e,index,data.id)}><i class="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
+                <td><button type="button"  onClick={(e)=>changeHandler(e,index,data.id)}><i className="fa fa-trash" aria-hidden="true"  style={{color:'red'}}></i>
 </button></td>
                 
                 </tr>)
@@ -108,6 +106,7 @@ const Gulshan = () => {
    )
     }
     return (
+        <div><h1>Gulshan</h1>
         <div className="table-responsive">
         <table className="table table-bordered">
         <thead>
@@ -128,7 +127,7 @@ const Gulshan = () => {
             {table}
         </tbody>
         </table>
-    </div>
+    </div></div>
     )
 }
 

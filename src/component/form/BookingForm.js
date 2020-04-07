@@ -17,7 +17,7 @@ const BookingForm = ({enterName,setName,enterContact,setContact,enterArea,setAre
           <input type="text" id="fname" name="firstname" value={enterName} onChange={e=>setName(e.target.value)} placeholder="Your name.." required />
       
           <label htmlFor="lname">Contact</label>
-          <input type="text" id="lname" name="contact" value={enterContact} onChange={e=>setContact(e.target.value)} placeholder="Your Contact.." required/>
+          <input type="tel" id="lname" name="contact" value={enterContact} onChange={e=>setContact(e.target.value)} placeholder="Your Contact.." required/>
           
           <label htmlFor="lname">Date</label>
           <input type="date" id="lname" name="date" value={enterDate} onChange={e=>setDate(e.target.value)} placeholder="Enter Date" required/>
