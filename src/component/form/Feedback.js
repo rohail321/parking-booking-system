@@ -18,6 +18,7 @@ const Feedback = () => {
       })
       .catch(err=>{
         alert(err)
+        window.location.reload()
     })
 		})
     

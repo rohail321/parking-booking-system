@@ -4,34 +4,21 @@ const FeedbackTable = () => {
     const [feedback, setFeedback] = useState([])
     useEffect(() => {
         let array=[]
-       getBooking().then((res)=>{
-           res.docs.forEach((dt)=>{
-            array.push(dt.data())
-               console.log(dt.data())
-               setFeedback(feedback=>[...feedback,dt.data()])
-               console.log(array)
-           })
-       })
+       getFeedbaack()
      
         
     },[])
-    const getBooking=async ()=>{
-        // let array=[]
-        return new Promise((res,rej)=>{
-            const db=firebase.firestore().collection('feedback').get()
+    const getFeedbaack=async ()=>{
+        
+        let array=[]
+            firebase.firestore().collection('feedback').onSnapshot((data)=>{
+                data.docs.forEach((dt)=>{         
+                           setFeedback(feedback=>[...feedback,dt.data()])
+                       })
+            })
+
             
-        // db.docs.forEach((doc)=>{
-        //     array.push(doc.data())
-        //     setBooking(array)
-        //     console.log(booking)
-        // })
-        if(db){
-            res(db)
-        }
-        else{
-            rej('fasle')
-        }
-        })
+        
         
         
     }
